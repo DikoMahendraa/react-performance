@@ -4,6 +4,7 @@ what I learn
 - memo() https://react.dev/reference/react/memo
 - useContext() https://react.dev/reference/react/useContext#usecontext
 - useReducers() https://react.dev/reference/react/useReducer#usage
+- lazyLoad https://react.dev/reference/react/lazy
 
 state management
 
