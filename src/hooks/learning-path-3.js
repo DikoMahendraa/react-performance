@@ -1,20 +1,18 @@
-import React, { memo, useReducer } from "react";
-import { useCallback } from "react";
+import React, { useCallback, memo, useReducer } from "react";
 
 /**
- * @Permasalahan
-  ketika kita menggunakan useState untuk mengelola state sederhana mungkin akan baik-baik saja, namun jika state tersebut
-  sudah sangat kompleks dan perlu memiliki berbagai jenis action maka useReducer adalah salah satu fitur yg tepat.
-  analogi sederhananya, useState adalah sebuah toko yg menjual 1 jenis barang,
-  sedangkan useReducer adalah toko yg menjual banyak jenis barang, sehingga kita bisa banyak memilih dan melakukan jenis action.
-  kode ini merupakan cara sederhana dalam memahami bagaimana useReducer bekerja, sehingga harapannya dari kode berikut
-  bisa di explore untuk kasus yg lebih kompleks lagi.
-*/
+* @Permasalahan
+* ketika kita menggunakan useState untuk mengelola state sederhana mungkin akan baik-baik saja, namun jika state tersebut
+* sudah sangat kompleks dan perlu memiliki berbagai jenis action maka useReducer adalah salah satu fitur yg tepat.
+* analogi sederhananya, useState adalah sebuah toko yg menjual 1 jenis barang,
+* sedangkan useReducer adalah toko yg menjual banyak jenis barang, sehingga kita bisa banyak memilih dan melakukan jenis action.
+* kode ini merupakan cara sederhana dalam memahami bagaimana useReducer bekerja, sehingga harapannya dari kode berikut
+* bisa di explore untuk kasus yg lebih kompleks lagi.
 
-/**
  * @useReducer
  * @reference https://react.dev/reference/react/useReducer#usage
  * mirip seperti useState namun digunakan untuk menghandle state yg lebih kompleks, dan memiliki concern pada performance dan maintablity.
+ 
  * @Reducer fungsi yg digunakan untuk memperbarui state berdasarkan action yg diterima
  * @InitialState nilai awal dari state tersebut
  */

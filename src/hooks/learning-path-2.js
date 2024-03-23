@@ -1,27 +1,23 @@
-import React, { useContext, useState } from "react";
-import { memo } from "react";
+import React, { memo, useContext, useState } from "react";
 
 /**
- * @Permasalahan
-    pada react kita biasa mengenal istilah Parent dan Child component, yg dimana setiap parent akan memiliki beberapa anak Component.
-    misal ComponentA punya anak [ComponentB, ComponentC] terus ComponentC punya anak [ComponentD] dan seterusnya.
-    analogi sederhananya bayangkan parent adalah Buyut / Kakek kemudian dia ingin memberikan uang kepada cucunya, hal yg biasa dilakukan adalah Kakek
-    akan memberikan kepada (Orang Tuanya) setelah itu ORTU akan memberikan uang tersebut kepada anaknya (Cucu si Kakek).
-    padahal si KAKEK bisa langsung memberikan uang tersebut kepada CUCU nya tanpa perantara ORANG TUA nya.
-    hal inilah yg dilakukan oleh si Context, jadi kita bisa langsung memberikan value tersebut kepada Component yg memerlukan.
-    dengan CATATAN, bahwa component tersebut berada dalam 1 pembungkus (Provider) yg sama
+* @Permasalahan
+* pada react kita biasa mengenal istilah Parent dan Child component, yg dimana setiap parent akan memiliki beberapa anak Component.
+* misal ComponentA punya anak [ComponentB, ComponentC] terus ComponentC punya anak [ComponentD] dan seterusnya.
+* *analogi sederhananya bayangkan parent adalah Buyut / Kakek kemudian dia ingin memberikan uang kepada cucunya, hal yg biasa dilakukan adalah Kakek
+* akan memberikan kepada (Orang Tuanya) setelah itu ORTU akan memberikan uang tersebut kepada anaknya (Cucu si Kakek).
+* padahal si KAKEK bisa langsung memberikan uang tersebut kepada CUCU nya tanpa perantara ORANG TUA nya.
+* hal inilah yg dilakukan oleh si Context, jadi kita bisa langsung memberikan value tersebut kepada Component yg memerlukan.
+* dengan CATATAN, bahwa component tersebut berada dalam 1 pembungkus (Provider) yg sama
 
+* @Goals
+* sehingga kita bisa meng optimisasi proses render ulang pada setiap component yg tidak memiliki perubahan didalamnnya
+* tidak memerlukan render ulang
 
- * @Goals
-  sehingga kita bisa meng optimisasi proses render ulang pada setiap component yg tidak memiliki perubahan didalamnnya
-  / tidak memerlukan render ulang
- */
-
-/**
- * @Solusi
- * @reference Context https://react.dev/reference/react/useContext#usecontext
-    useContext mengizinkan kita untuk mengakses value dari context di seluruh component tanpa harus melewati props secara manual dari komponen ke komponen
- */
+* @Solusi
+* @reference Context https://react.dev/reference/react/useContext#usecontext
+*   useContext mengizinkan kita untuk mengakses value dari context di seluruh component tanpa harus melewati props secara manual dari komponen ke komponen
+*/
 
 const TimeContext = React.createContext();
 

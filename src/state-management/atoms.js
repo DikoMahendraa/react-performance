@@ -39,6 +39,7 @@ const animeAtom = atom([
 // kita bisa melakukan modifikasi terhadap data yg akan di gunakan/tampilkan
 const modifiedValue = atom((get) => {
   return get(animeAtom).map((item) => ({
+    // hanya menampilkan data label
     label: `${item.title} - ${item.year}`,
   }));
 });
