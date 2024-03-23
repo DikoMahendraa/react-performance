@@ -4,3 +4,7 @@ what I learn
 - memo() https://react.dev/reference/react/memo
 - useContext() https://react.dev/reference/react/useContext#usecontext
 - useReducers() https://react.dev/reference/react/useReducer#usage
+
+state management
+
+- Jotai https://jotai.org/
