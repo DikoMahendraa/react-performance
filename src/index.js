@@ -8,12 +8,19 @@ import DashboardPage from "./axios-instance/Dashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+
+const App = (
   <Router>
     <Routes>
       <Route path="/login" element={<LoginPage />} />
-
       <Route path="/dashboard" element={<DashboardPage />} />
     </Routes>
   </Router>
 );
+
+// Conditionally render React.StrictMode based on environment
+if (process.env.NODE_ENV === "production") {
+  root.render(<React.StrictMode>{App}</React.StrictMode>);
+} else {
+  root.render(App);
+}

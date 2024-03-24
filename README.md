@@ -6,6 +6,8 @@ what I learn
 - useReducers() https://react.dev/reference/react/useReducer#usage
 - lazyLoad https://react.dev/reference/react/lazy
 
+- axiosInstance https://axios-http.com/docs/instance
+
 state management
 
 - Jotai https://jotai.org/
