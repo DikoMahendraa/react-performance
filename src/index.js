@@ -6,6 +6,7 @@ import LoginPage from "./axios-instance";
 import DashboardPage from "./axios-instance/Dashboard";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ImageOptimization from "./images-optimization";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -14,6 +15,7 @@ const App = (
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/image-optimization" element={<ImageOptimization />} />
     </Routes>
   </Router>
 );
