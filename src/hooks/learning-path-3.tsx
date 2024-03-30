@@ -24,7 +24,15 @@ const initialValues = {
   job: "Frontend Developer",
 };
 
-function reducer(state, action) {
+type TStateReducer = typeof initialValues;
+type TActionReducers = {
+  type: "CHANGE_USERNAME" | "CHANGE_AGE" | "CHANGE_GENDER" | "CHANGE_JOB";
+};
+
+function reducer(
+  state: TStateReducer,
+  action: TActionReducers & TStateReducer
+) {
   switch (action.type) {
     case "CHANGE_USERNAME":
       return {
@@ -51,7 +59,19 @@ function reducer(state, action) {
   }
 }
 
-const InputValue = ({ label, onChange, type, options }) => {
+type TInputValue = {
+  label: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  type?: string;
+  options?: Array<string>;
+};
+
+const InputValue: React.FC<TInputValue> = ({
+  label,
+  onChange,
+  type,
+  options,
+}) => {
   return (
     <div className="flex flex-col w-full max-w-[20rem] mb-6">
       <label className="font-semibold">Change {label}:</label>
@@ -60,6 +80,7 @@ const InputValue = ({ label, onChange, type, options }) => {
         <select
           className="p-4 w-[20rem] border border-gray-500 mb-4"
           name="job"
+          // @ts-ignore
           onChange={onChange}
           defaultValue="frontend"
         >
@@ -80,7 +101,7 @@ const InputValue = ({ label, onChange, type, options }) => {
   );
 };
 
-const ComponentB = memo(() => {
+const ComponentB: React.FC = memo(() => {
   console.log("ComponentB");
   return <div>Render Component B</div>;
 });
@@ -97,9 +118,20 @@ function LearningPath3() {
   console.log("renderr");
 
   const onChange = useCallback(
-    (e, { type, key }) => {
+    (
+      e: React.ChangeEvent<HTMLInputElement>,
+      {
+        type,
+        key,
+      }: {
+        type: TActionReducers["type"];
+        key: keyof TStateReducer;
+      }
+    ) => {
       const value = e.target.value;
       // memanggil dispatch untuk mengubah state yg ada kemudian akan di proses oleh reducer
+
+      // @ts-expect-error
       dispatch({ type, [key]: value });
     },
     [dispatch]
@@ -111,6 +143,7 @@ function LearningPath3() {
         {Object.keys(state).map((item) => (
           <div key={item} className="flex items-center">
             <p className="font-semibold uppercase">
+              {/* @ts-ignore */}
               {item} : <span className="text-blue-600">{state[item]}</span>
             </p>
           </div>
@@ -119,13 +152,15 @@ function LearningPath3() {
 
       <InputValue
         label="USERNAME"
-        onChange={(e) =>
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           onChange(e, { type: "CHANGE_USERNAME", key: "username" })
         }
       />
       <InputValue
         label="AGE"
-        onChange={(e) => onChange(e, { type: "CHANGE_AGE", key: "age" })}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange(e, { type: "CHANGE_AGE", key: "age" })
+        }
       />
       <InputValue
         label="GENDER"

@@ -1,12 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from "react";
 import { useCallback } from "react";
 import { useLogin } from "./instance";
 import { useNavigate, Navigate } from "react-router-dom";
 
 function LoginPage() {
-  const [, setEmail] = useState();
-  const [, setPassword] = useState();
   const navigation = useNavigate();
 
   const accToken = localStorage.getItem("access_token");
@@ -17,6 +14,7 @@ function LoginPage() {
   }
 
   const onSubmit = useCallback(async () => {
+    // @ts-ignore
     const { status, data } = await useLogin();
 
     localStorage.setItem("access_token", data?.access_token);
@@ -39,7 +37,6 @@ function LoginPage() {
             </label>
             <input
               type="email"
-              onChange={(e) => setEmail(e.target.value)}
               className="w-full border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
               placeholder="Enter your email"
             />
@@ -49,7 +46,6 @@ function LoginPage() {
               Password
             </label>
             <input
-              onChange={(e) => setPassword(e.target.value)}
               type="password"
               className="w-full border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
               placeholder="Enter your password"

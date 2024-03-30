@@ -37,7 +37,26 @@ import React, { useState, memo, useCallback } from "react";
 * bandingkan setelah dan sebelum menggunakan memo dan useCallback.
 */
 
-const Component1 = ({ increment, decrement, count = 0 }) => {
+type TComponent1 = {
+  increment: () => void;
+  decrement: () => void;
+  count: number;
+};
+
+type TComponent2 = {
+  words?: string;
+  onChange?: () => void;
+};
+
+type TComponent4 = {
+  onFetch: () => void;
+};
+
+const Component1: React.FC<TComponent1> = ({
+  increment,
+  decrement,
+  count = 0,
+}) => {
   console.log("render component 1");
   return (
     <div className="w-full border border-gray-400 my-24 py-4">
@@ -60,7 +79,7 @@ const Component1 = ({ increment, decrement, count = 0 }) => {
   );
 };
 
-const Component2 = ({ words, onChange }) => {
+const Component2: React.FC<TComponent2> = ({ words, onChange }) => {
   console.log("render component 2");
   return (
     <div className="w-full border border-gray-400 my-24 flex justify-center py-4">
@@ -77,7 +96,7 @@ const Component2 = ({ words, onChange }) => {
   );
 };
 
-const Component3 = () => {
+const Component3: React.FC = () => {
   console.log("render component 3");
   return (
     <div className="w-full py-4 text-center border border-gray-400">
@@ -86,7 +105,7 @@ const Component3 = () => {
   );
 };
 
-const Component4 = memo(({ onFetch }) => {
+const Component4: React.FC<TComponent4> = memo(({ onFetch }) => {
   console.log("render component 4");
   return (
     <div className="w-full mt-10 py-4 text-center border border-gray-400">
@@ -105,16 +124,8 @@ const Component4 = memo(({ onFetch }) => {
   );
 });
 
-const LearningPath1 = (props) => {
+const LearningPath1 = () => {
   const [count, setCount] = useState(0);
-
-  // const onFetchComponent =  async () => {
-  //   return await fetch("https://jsonplaceholder.typicode.com/posts")
-  //     .then(async (response) => {
-  //       await response.json();
-  //     })
-  //     .then((json) => console.log(json));
-  // };
 
   // Gunakan useCallback untuk memastikan onFetchComponent tidak dibuat ulang setiap render
   const onFetchComponent = useCallback(async () => {

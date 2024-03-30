@@ -1,7 +1,8 @@
-import React, { useEffect, lazy, Suspense, useState, useCallback } from "react";
+import { useEffect, lazy, Suspense, useState, useCallback } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { getProfile } from "./instance";
 import SkeletonShape from "./SkeletonShape";
+import { TProfileCard } from "./ProfileCard";
 
 const ProfileCard = lazy(() => import("./ProfileCard"));
 
@@ -24,7 +25,7 @@ const ProfileCard = lazy(() => import("./ProfileCard"));
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const [profile, setProfile] = useState({});
+  const [profile, setProfile] = useState<TProfileCard>();
 
   const accToken = localStorage.getItem("access_token");
   const refToken = localStorage.getItem("refresh_token");
