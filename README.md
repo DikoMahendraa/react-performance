@@ -5,6 +5,7 @@ what I learn
 - useContext() https://react.dev/reference/react/useContext#usecontext
 - useReducers() https://react.dev/reference/react/useReducer#usage
 - lazyLoad https://react.dev/reference/react/lazy
+- imagePerformance https://web.dev/learn/performance/image-performance
 
 - axiosInstance https://axios-http.com/docs/instance
 
