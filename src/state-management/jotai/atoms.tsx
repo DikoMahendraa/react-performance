@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from "react";
+import { memo, useMemo } from "react";
 
 import { atom, useAtomValue, useSetAtom } from "jotai";
 
@@ -44,7 +44,7 @@ const modifiedValue = atom((get) => {
   }));
 });
 
-const ComponentList = ({ title }) => {
+const ComponentList: React.FC<{ title: string }> = ({ title }) => {
   return (
     <div className="flex w-[20rem] justify-between">
       <li>{title}</li>

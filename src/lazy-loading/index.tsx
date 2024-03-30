@@ -1,4 +1,4 @@
-import React, { useState, Suspense, useEffect, lazy } from "react";
+import { useState, Suspense, useEffect, lazy } from "react";
 
 import ComponentC from "./ComponentC";
 import axios from "axios";
@@ -31,13 +31,15 @@ const ComponentB = lazy(() => import("./ComponentB"));
  * untuk melihat apakah loading bekerja, pastikan bahwa komponen yg dibungkus menggunakan Suspense di import menggunakan lazy
  */
 
-function LazyLoading() {
-  // const [isLazy, setLazy] = useState(false);
-  const [data, setData] = useState([]);
+type TApiResponse = Array<{ title: string }>;
 
-  const res = async () =>
+function LazyLoading() {
+  const [isLazy, setLazy] = useState<boolean>(false);
+  const [data, setData] = useState<TApiResponse>([]);
+
+  const fetchPost = async () =>
     await axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get<TApiResponse>("https://jsonplaceholder.typicode.com/posts")
       .then((response) => {
         if (response.status === 200) {
           setData(response.data);
@@ -46,28 +48,25 @@ function LazyLoading() {
       .catch((error) => console.log(error));
 
   useEffect(() => {
-    res();
+    fetchPost();
   }, []);
-
-  console.log(data);
 
   return (
     <div className="w-full h-screen flex flex-col justify-center items-center">
       <h1>Parent Component</h1>
 
-      {/* <button
+      <button
         onClick={() => setLazy(!isLazy)}
         className="px-6 py2 bg-blue-400 text-white"
       >
         switch lazy {isLazy ? "active" : "unactive"}
       </button>
 
-
       {isLazy && (
         <Suspense fallback={<div>...Loading</div>}>
           <ComponentB title="Compoennt B" />
         </Suspense>
-      )} */}
+      )}
 
       <ComponentC />
 

@@ -19,11 +19,24 @@ import React, { memo, useContext, useState } from "react";
 *   useContext mengizinkan kita untuk mengakses value dari context di seluruh component tanpa harus melewati props secara manual dari komponen ke komponen
 */
 
-const TimeContext = React.createContext();
+interface TimeContextType {
+  time: number;
+  setTime: React.Dispatch<React.SetStateAction<number>>;
+}
+
+const TimeContext = React.createContext<TimeContextType | undefined>(undefined);
+
+const useTimeContext = () => {
+  const context = useContext(TimeContext);
+  if (!context) {
+    throw new Error("useTimeContext must be used within a TimeProvider");
+  }
+  return context;
+};
 
 const ComponentA = () => {
   console.log("render component A");
-  const { time, setTime } = useContext(TimeContext);
+  const { time, setTime } = useTimeContext();
 
   return (
     <div className="border border-gray-400 p-4">
@@ -61,7 +74,7 @@ const ComponentC = memo(() => {
 });
 
 const ComponentD = () => {
-  const { time } = useContext(TimeContext);
+  const { time } = useTimeContext();
   console.log("render component D");
 
   return (

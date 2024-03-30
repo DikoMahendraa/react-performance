@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { instance } from "../axios-instance/instance";
 
 /**
@@ -70,20 +69,20 @@ import { instance } from "../axios-instance/instance";
  * */
 
 export default function ImageOptimization() {
-  const [listImgs, setListImgs] = useState([]);
+  const [listImgs, setListImgs] = useState<
+    Array<{ id: number; thumbnailUrl: string }>
+  >([]);
 
   const fetchImages = async () => {
     return await instance
       .get("https://jsonplaceholder.typicode.com/photos")
       .then((response) => setListImgs(response.data))
-      .catch((error) => "ups something went wrong");
+      .catch(() => "ups something went wrong");
   };
 
   useEffect(() => {
     fetchImages();
   }, []);
-
-  console.log({ listImgs });
 
   return (
     <div className="flex flex-col items-center h-screen justify-center">
@@ -93,8 +92,9 @@ export default function ImageOptimization() {
         {listImgs.map((element) => {
           return (
             <img
+              key={element?.id}
               alt="testing"
-              src={element.thumbnailUrl}
+              src={element?.thumbnailUrl}
               className="h-auto max-w-full"
               loading="lazy"
             />

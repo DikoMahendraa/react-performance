@@ -1,6 +1,13 @@
-import React, { memo } from "react";
+import { memo } from "react";
 
-const ProfileCard = (profile) => {
+export type TProfileCard = {
+  avatar: string;
+  email: string;
+  role: string;
+  name: string;
+};
+
+const ProfileCard: React.FC<TProfileCard> = (profile) => {
   return (
     <>
       <img
